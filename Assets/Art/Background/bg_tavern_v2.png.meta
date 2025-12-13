@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 740c5679166f5244a94e30cd5eb4f19c
+guid: 2d84bb72906658d4fa8227a04d1d748c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4675744227224059162
-    second: Tavern 2_0
+      213: 2374049155706415738
+    second: bg_tavern_v2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tavern 2_0
+      name: bg_tavern_v2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1024
-        height: 1024
+        width: 412
+        height: 732
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6e20ab3066b6c1fb0800000000000000
-      internalID: -4675744227224059162
+      spriteID: a7a623df02152f020800000000000000
+      internalID: 2374049155706415738
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Tavern 2_0: -4675744227224059162
+      bg_tavern_v2_0: 2374049155706415738
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

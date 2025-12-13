@@ -951,7 +951,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4675744227224059162, guid: 740c5679166f5244a94e30cd5eb4f19c, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1106,6 +1106,81 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &531815371
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 531815372}
+  - component: {fileID: 531815374}
+  - component: {fileID: 531815373}
+  m_Layer: 5
+  m_Name: DarkLines
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &531815372
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531815371}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1131563586}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -3.961, y: 39.3113}
+  m_SizeDelta: {x: 739.9221, y: 561.7444}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &531815373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531815371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &531815374
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531815371}
+  m_CullTransparentMesh: 1
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1641,6 +1716,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 531815372}
   - {fileID: 456734871}
   - {fileID: 931697831}
   - {fileID: 1562244706}
@@ -1696,16 +1772,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1297209019}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0839591360fd3dd41af416b69104604f, type: 3}
+  m_Script: {fileID: 11500000, guid: 816bcb2d1eb5f4341bd1ba95e2dd45b2, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GMSv3
-  inkJSONAsset: {fileID: 4900000, guid: 24208167a4a626b4fbd942b2bd829259, type: 3}
+  m_EditorClassIdentifier: Assembly-CSharp::GMSv4
+  inkJSONAsset: {fileID: 4900000, guid: 8eaca2987cb463f4e8039f668d106427, type: 3}
   storyText: {fileID: 1890584323}
   choiceButtonPrefab: {fileID: 4048906356941963024, guid: c2f809338a451ca43855bfd5a98df608, type: 3}
   choiceContainer: {fileID: 1108995514}
   continueButton: {fileID: 249589408}
   backButton: {fileID: 393586440}
-  backgroundImage: {fileID: 0}
+  backgroundImage: {fileID: 456734872}
+  backgroundEntries:
+  - key: bg_tavern
+    sprite: {fileID: 985182177187144514, guid: d386fa8e18ed59e449eee77a87c05248, type: 3}
+  - key: bg_caravan
+    sprite: {fileID: 9103372351138538408, guid: 02c59f719063241418ce980eb31d5f70, type: 3}
+  - key: bg_castle
+    sprite: {fileID: 8188105460623013684, guid: c86dd44eacf45394a9aa34be762614b7, type: 3}
+  - key: bg_castledininghall
+    sprite: {fileID: -1128935627978520688, guid: 6a27cb60eb0dc6a4faf18f8a561b919f, type: 3}
+  - key: bg_kitchen
+    sprite: {fileID: -354980550910637501, guid: f1771039151639746b54a4050447ce56, type: 3}
 --- !u!1 &1497156656
 GameObject:
   m_ObjectHideFlags: 0
@@ -1849,8 +1936,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -151}
-  m_SizeDelta: {x: 100, y: 27.3905}
+  m_AnchoredPosition: {x: -0.8981, y: -151}
+  m_SizeDelta: {x: 105.9587, y: 27.3905}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1562244707
 MonoBehaviour:

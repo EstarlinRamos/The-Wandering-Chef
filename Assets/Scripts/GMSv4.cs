@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using Ink.Runtime;
 
-public class GMSv3 : MonoBehaviour
+public class GMSv4 : MonoBehaviour
 {
     [Header("Ink Files")]
     [SerializeField] private TextAsset inkJSONAsset;
@@ -18,6 +18,16 @@ public class GMSv3 : MonoBehaviour
 
     [Header("Backgrounds (optional)")]
     [SerializeField] private Image backgroundImage;
+
+    [System.Serializable]
+    public class BackgroundEntry
+    {
+        public string key;     // e.g. "bg_kitchen"
+        public Sprite sprite;  // the sprite to show
+    }
+
+    [SerializeField] private List<BackgroundEntry> backgroundEntries;
+    private Dictionary<string, Sprite> backgroundMap;
 
     private Story story;
 
@@ -35,7 +45,7 @@ public class GMSv3 : MonoBehaviour
     {
         if (inkJSONAsset == null)
         {
-            Debug.LogError("[GMSv2] Ink JSON Asset is missing");
+            Debug.LogError("[GMSv4] Ink JSON Asset is missing");
             enabled = false;
             return;
         }
@@ -46,10 +56,12 @@ public class GMSv3 : MonoBehaviour
         }
         catch (System.Exception ex)
         {
-            Debug.LogError("[GMSv2] Failed to create Story from JSON: " + ex.Message);
+            Debug.LogError("[GMSv4] Failed to create Story from JSON: " + ex.Message);
             enabled = false;
             return;
         }
+
+        BuildBackgroundMap();
 
         if (storyText != null)
         {
@@ -85,18 +97,41 @@ public class GMSv3 : MonoBehaviour
         }
     }
 
+    // Build key -> sprite map for backgrounds
+    private void BuildBackgroundMap()
+    {
+        backgroundMap = new Dictionary<string, Sprite>();
+
+        if (backgroundEntries == null) return;
+
+        foreach (var entry in backgroundEntries)
+        {
+            if (string.IsNullOrEmpty(entry.key) || entry.sprite == null)
+                continue;
+
+            if (!backgroundMap.ContainsKey(entry.key))
+            {
+                backgroundMap.Add(entry.key, entry.sprite);
+            }
+            else
+            {
+                Debug.LogWarning("[GMSv4] Duplicate background key: " + entry.key);
+            }
+        }
+    }
+
     private void OnContinueButtonClicked()
     {
         if (story == null)
         {
-            Debug.LogWarning("[GMSv2] Continue pressed but story is null");
+            Debug.LogWarning("[GMSv4] Continue pressed but story is null");
             return;
         }
 
         // Ignore Next if choices are visible
         if (story.currentChoices.Count > 0)
         {
-            Debug.Log("[GMSv2] Choices visible, Next ignored");
+            Debug.Log("[GMSv4] Choices visible, Next ignored");
             return;
         }
 
@@ -108,13 +143,13 @@ public class GMSv3 : MonoBehaviour
     {
         if (story == null)
         {
-            Debug.LogWarning("[GMSv2] Back pressed but story is null");
+            Debug.LogWarning("[GMSv4] Back pressed but story is null");
             return;
         }
 
         if (snapshotStack.Count == 0)
         {
-            Debug.Log("[GMSv2] No previous state to go back to");
+            Debug.Log("[GMSv4] No previous state to go back to");
             return;
         }
 
@@ -127,7 +162,7 @@ public class GMSv3 : MonoBehaviour
         }
         catch (System.Exception ex)
         {
-            Debug.LogError("[GMSv2] Failed to load story state: " + ex.Message);
+            Debug.LogError("[GMSv4] Failed to load story state: " + ex.Message);
             return;
         }
 
@@ -148,6 +183,9 @@ public class GMSv3 : MonoBehaviour
         {
             string line = story.Continue().Trim();
 
+            // Handle tags (e.g. bg_kitchen) on this line
+            HandleTags(story.currentTags);
+
             if (storyText != null)
             {
                 if (string.IsNullOrEmpty(storyText.text))
@@ -158,7 +196,7 @@ public class GMSv3 : MonoBehaviour
         }
         else
         {
-            Debug.Log("[GMSv2] No more content to continue");
+            Debug.Log("[GMSv4] No more content to continue");
         }
     }
 
@@ -244,6 +282,40 @@ public class GMSv3 : MonoBehaviour
         for (int i = choiceContainer.childCount - 1; i >= 0; i--)
         {
             Destroy(choiceContainer.GetChild(i).gameObject);
+        }
+    }
+
+    // --- Tag / background helpers ---
+
+    private void HandleTags(List<string> tags)
+    {
+        if (tags == null || tags.Count == 0)
+            return;
+
+        foreach (var tag in tags)
+        {
+            // Background tags: bg_kitchen, bg_street, etc.
+            if (tag.StartsWith("bg_"))
+            {
+                SetBackground(tag);
+            }
+
+            // Add more tag types here later (music_, char_left_, etc.)
+        }
+    }
+
+    private void SetBackground(string key)
+    {
+        if (backgroundImage == null || backgroundMap == null)
+            return;
+
+        if (backgroundMap.TryGetValue(key, out Sprite sprite))
+        {
+            backgroundImage.sprite = sprite;
+        }
+        else
+        {
+            Debug.LogWarning("[GMSv4] No background found for key: " + key);
         }
     }
 }
